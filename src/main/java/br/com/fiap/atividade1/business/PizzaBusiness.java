@@ -1,6 +1,7 @@
 package br.com.fiap.atividade1.business;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.atividade1.dto.PizzaDTO;
+import br.com.fiap.atividade1.model.Ingrediente;
 import br.com.fiap.atividade1.model.Pizza;
+import br.com.fiap.atividade1.repository.IngredienteRepository;
 import br.com.fiap.atividade1.repository.PizzaRepository;
 
 /**
@@ -22,23 +26,27 @@ public class PizzaBusiness {
 	@Autowired
 	private PizzaRepository pizzaRepository;
 	
+	/** The ingrediente repository. */
+	@Autowired
+	private IngredienteRepository ingredienteRepository;
+	
 	/**
 	 * Gets the all.
 	 *
 	 * @return the all
 	 */
-	public List<Pizza> getAll() {
-		return this.pizzaRepository.findAll();
+	public List<PizzaDTO> getAll() {
+		return this.pizzaRepository.findAllDTO();
 	}
 	
 	/**
-	 * Gets the.
+	 * Gets the pizza by Id.
 	 *
 	 * @param id the id
 	 * @return the optional
 	 */
-	public Optional<Pizza> get(Long id) {
-		return this.pizzaRepository.findById(id);
+	public PizzaDTO get(Long id) {
+		return this.pizzaRepository.findByIdDTO(id);
 	}
 
 	/**
@@ -47,10 +55,14 @@ public class PizzaBusiness {
 	 * @param pizza the pizza
 	 * @return the pizza
 	 */
-	public Pizza create(Pizza pizza) {
-		Pizza newPizza = this.pizzaRepository.save(pizza);
+	public PizzaDTO create(PizzaDTO dto) {
+		Pizza entity = new Pizza();
 		
-		return newPizza;
+		this.mapDtoToEntity(dto, entity);
+		
+		Pizza pizza = this.pizzaRepository.save(entity);
+		
+		return new PizzaDTO(pizza);
 	}
 
 	/**
@@ -60,21 +72,18 @@ public class PizzaBusiness {
 	 * @param newPizza the new pizza
 	 * @return the optional
 	 */
-	public Optional<Pizza> update(long id, Pizza newPizza) {
-		Optional<Pizza> oldPizza = pizzaRepository.findById(id);
+	public PizzaDTO update(long id, PizzaDTO dto) {
+		Pizza oldPizza = pizzaRepository.findById(id).orElse(null);
+		
+		if(oldPizza == null) return null;
         
-        if(oldPizza.isPresent()){
-            Pizza pizza = oldPizza.get();
-            
-            pizza.setName(newPizza.getName());
-            pizza.setIngredients(newPizza.getIngredients());
-            
-            pizzaRepository.save(pizza);
-            
-            return Optional.of(pizza);
-        }
-            
-		return Optional.empty();
+        oldPizza.getIngredients().clear();
+        
+        mapDtoToEntity(dto, oldPizza);
+        
+        pizzaRepository.save(oldPizza);
+        
+        return new PizzaDTO(oldPizza);
 	}
 
 	/**
@@ -93,4 +102,23 @@ public class PizzaBusiness {
         
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
+
+	/**
+	 * Map dto to entity.
+	 *
+	 * @param dto the dto
+	 */
+	private void mapDtoToEntity(PizzaDTO dto, Pizza entity) {
+		entity.setName(dto.getName());
+		
+		for(String ingredientName : dto.getIngredients()) {
+			Ingrediente ingredient = ingredienteRepository.findByName(ingredientName);
+            if (ingredient == null) {
+            	ingredient = new Ingrediente(ingredientName);
+            	ingredient.setPizzas(new ArrayList<>());
+            }
+            entity.getIngredients().add(ingredient);
+		}
+    }
 }

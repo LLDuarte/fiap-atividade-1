@@ -1,5 +1,6 @@
 package br.com.fiap.atividade1.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,9 +18,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "tb_pizza")
 public class Pizza {
@@ -35,7 +36,7 @@ public class Pizza {
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(
 	  name = "tb_pizza_ingredients", 
-	  joinColumns = @JoinColumn(name = "pizza_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-	private List<Ingrediente> ingredients;
+	  joinColumns = @JoinColumn(name = "ingredient_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+	private List<Ingrediente> ingredients = new ArrayList<>();
 }

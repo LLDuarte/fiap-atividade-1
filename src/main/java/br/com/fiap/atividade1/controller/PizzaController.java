@@ -1,7 +1,6 @@
 package br.com.fiap.atividade1.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.atividade1.business.PizzaBusiness;
-import br.com.fiap.atividade1.model.Pizza;
+import br.com.fiap.atividade1.dto.PizzaDTO;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,8 +32,7 @@ public class PizzaController {
 	 * @return the all
 	 */
 	@RequestMapping(value = "/pizzas", method = RequestMethod.GET)
-    public List<Pizza> getAll() {
-		log.info("entrei no controller");
+    public List<PizzaDTO> getAll() {
         return pizzaBusiness.getAll();
     }
 	
@@ -45,12 +43,12 @@ public class PizzaController {
 	 * @return the pizza
 	 */
 	@RequestMapping(value = "/pizza/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Pizza> get(@PathVariable(value = "id") long id)
+    public ResponseEntity<PizzaDTO> get(@PathVariable(value = "id") long id)
     {
-        Optional<Pizza> pizza = pizzaBusiness.get(id);
+        PizzaDTO pizza = pizzaBusiness.get(id);
         
-        if(pizza.isPresent())
-            return new ResponseEntity<Pizza>(pizza.get(), HttpStatus.OK);
+        if(pizza != null)
+            return new ResponseEntity<PizzaDTO>(pizza, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -62,11 +60,9 @@ public class PizzaController {
 	 * @return the pizza
 	 */
 	@RequestMapping(value = "/pizza/create", method =  RequestMethod.POST)
-    public Pizza create(@RequestBody Pizza pizza)
+    public PizzaDTO create(@RequestBody PizzaDTO pizza)
     {
-		Pizza newPizza = pizzaBusiness.create(pizza);
-		
-        return newPizza;
+        return pizzaBusiness.create(pizza);
     }
 
     /**
@@ -77,12 +73,12 @@ public class PizzaController {
      * @return the response entity
      */
     @RequestMapping(value = "/pizza/{id}", method =  RequestMethod.PUT)
-    public ResponseEntity<Pizza> update(@PathVariable(value = "id") long id, @RequestBody Pizza newPizza)
+    public ResponseEntity<PizzaDTO> update(@PathVariable(value = "id") long id, @RequestBody PizzaDTO newPizza)
     {
-    	Optional<Pizza> updatedPizza = this.pizzaBusiness.update(id, newPizza);
+    	PizzaDTO updatedPizza = this.pizzaBusiness.update(id, newPizza);
         
-    	if(updatedPizza.isPresent()) {
-    		return new ResponseEntity<Pizza>(updatedPizza.get(), HttpStatus.OK);
+    	if(updatedPizza != null) {
+    		return new ResponseEntity<PizzaDTO>(updatedPizza, HttpStatus.OK);
         }
 
     	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
