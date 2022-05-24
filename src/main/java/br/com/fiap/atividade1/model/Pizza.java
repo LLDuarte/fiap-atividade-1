@@ -3,24 +3,15 @@ package br.com.fiap.atividade1.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @Table(name = "tb_pizza")
 public class Pizza {
@@ -33,10 +24,10 @@ public class Pizza {
 	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 	
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	@JoinTable(
 	  name = "tb_pizza_ingredients", 
-	  joinColumns = @JoinColumn(name = "ingredient_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+	  joinColumns = @JoinColumn(name = "pizza_id"),
+	  inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
 	private List<Ingrediente> ingredients = new ArrayList<>();
 }
