@@ -65,6 +65,18 @@ public class PizzaBusiness {
 		return new PizzaDTO(pizza);
 	}
 
+	public List<PizzaDTO> createBatch(List<PizzaDTO> dto) {
+		List<PizzaDTO> pizzas = new ArrayList<>();
+
+		for(PizzaDTO p : dto) {
+			PizzaDTO created = this.create(p);
+
+			pizzas.add(created);
+		}
+
+		return pizzas;
+	}
+
 	/**
 	 * Update.
 	 *

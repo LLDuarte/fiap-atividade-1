@@ -20,13 +20,20 @@ public class Atividade1Application {
 	@Bean
 	CommandLineRunner run(PizzaBusiness pizzaBusiness) {
 		return args -> {
-			PizzaDTO dto = new PizzaDTO("Frango com Catupiry", new HashSet<>(Arrays.asList("Molho de tomate", "Frango", "Catupiry")));
+			List<PizzaDTO> pizzas = new ArrayList();
 
-			pizzaBusiness.create(dto);
+			pizzas.add(new PizzaDTO("Calabresa", new HashSet<>(Arrays.asList("Calabresa", "Cebola", "Azeitonas verdes", "Queijo"))));
+			pizzas.add(new PizzaDTO("Marguerita", new HashSet<>(Arrays.asList("Queijo", "Tomate", "Manjericão"))));
+			pizzas.add(new PizzaDTO("Queijo", new HashSet<>(Arrays.asList("Queijo", "Tomate"))));
+			pizzas.add(new PizzaDTO("Napolitana", new HashSet<>(Arrays.asList("Parmesão", "Tomate", "Orégano", "Alho"))));
+			pizzas.add(new PizzaDTO("Calabria", new HashSet<>(Arrays.asList("Calabresa", "Cebola", "Queijo", "Orégano"))));
+			pizzas.add(new PizzaDTO("Pepperoni", new HashSet<>(Arrays.asList("Pepperoni", "Queijo", "Requeijão"))));
+			pizzas.add(new PizzaDTO("Brasileira", new HashSet<>(Arrays.asList("Molho de tomate", "Requeijão", "Presunto", "Azeitonas verdes"))));
+			pizzas.add(new PizzaDTO("Vegetariana", new HashSet<>(Arrays.asList("Molho de tomate", "Queijo", "Tomate", "Champignon", "Pimentão verde", "Cebola", "Azeitonas verdes"))));
+			pizzas.add(new PizzaDTO("4 Queijos", new HashSet<>(Arrays.asList("Queijo", "Parmesão", "Provolone", "Cream Cheese"))));
 
-			dto = new PizzaDTO("Calabresa", new HashSet<>(Arrays.asList("Calabresa", "Cebola", "Orégano")));
-
-			pizzaBusiness.create(dto);
+			pizzaBusiness.createBatch(pizzas);
 		};
 	}
 }
+
