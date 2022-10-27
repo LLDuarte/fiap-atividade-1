@@ -6,7 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -23,14 +29,10 @@ public class Atividade1Application {
 			List<PizzaDTO> pizzas = new ArrayList();
 
 			pizzas.add(new PizzaDTO("Calabresa", new HashSet<>(Arrays.asList("Calabresa", "Cebola", "Azeitonas verdes", "Queijo"))));
-			pizzas.add(new PizzaDTO("Marguerita", new HashSet<>(Arrays.asList("Queijo", "Tomate", "Manjericão"))));
-			pizzas.add(new PizzaDTO("Queijo", new HashSet<>(Arrays.asList("Queijo", "Tomate"))));
-			pizzas.add(new PizzaDTO("Napolitana", new HashSet<>(Arrays.asList("Parmesão", "Tomate", "Orégano", "Alho"))));
-			pizzas.add(new PizzaDTO("Calabria", new HashSet<>(Arrays.asList("Calabresa", "Cebola", "Queijo", "Orégano"))));
-			pizzas.add(new PizzaDTO("Pepperoni", new HashSet<>(Arrays.asList("Pepperoni", "Queijo", "Requeijão"))));
-			pizzas.add(new PizzaDTO("Brasileira", new HashSet<>(Arrays.asList("Molho de tomate", "Requeijão", "Presunto", "Azeitonas verdes"))));
-			pizzas.add(new PizzaDTO("Vegetariana", new HashSet<>(Arrays.asList("Molho de tomate", "Queijo", "Tomate", "Champignon", "Pimentão verde", "Cebola", "Azeitonas verdes"))));
-			pizzas.add(new PizzaDTO("4 Queijos", new HashSet<>(Arrays.asList("Queijo", "Parmesão", "Provolone", "Cream Cheese"))));
+			pizzas.add(new PizzaDTO("Marguerita", new HashSet<>(Arrays.asList("Tomate", "Manjericão"))));
+			pizzas.add(new PizzaDTO("Brasileira", new HashSet<>(Arrays.asList("Molho de tomate", "Requeijão", "Presunto", "Azeitonas pretas"))));
+			pizzas.add(new PizzaDTO("Vegetariana", new HashSet<>(Arrays.asList("Champignon", "Pimentão verde", "Cebolinha"))));
+			pizzas.add(new PizzaDTO("4 Queijos", new HashSet<>(Arrays.asList("Parmesão", "Provolone", "Cream Cheese", "Queijo Prato"))));
 
 			pizzaBusiness.createBatch(pizzas);
 		};

@@ -29,7 +29,7 @@ public class PizzaBusiness {
 	/** The ingrediente repository. */
 	@Autowired
 	private IngredienteRepository ingredienteRepository;
-	
+
 	/**
 	 * Gets the all.
 	 *
@@ -38,7 +38,7 @@ public class PizzaBusiness {
 	public List<PizzaDTO> getAll() {
 		return this.pizzaRepository.findAllDTO();
 	}
-	
+
 	/**
 	 * Gets the pizza by Id.
 	 *
@@ -52,7 +52,7 @@ public class PizzaBusiness {
 	/**
 	 * Creates the.
 	 *
-	 * @param pizza the pizza
+	 * @param dto the dto
 	 * @return the pizza
 	 */
 	public PizzaDTO create(PizzaDTO dto) {
@@ -65,6 +65,12 @@ public class PizzaBusiness {
 		return new PizzaDTO(pizza);
 	}
 
+	/**
+	 * Create batch list.
+	 *
+	 * @param dto the dto
+	 * @return the list
+	 */
 	public List<PizzaDTO> createBatch(List<PizzaDTO> dto) {
 		List<PizzaDTO> pizzas = new ArrayList<>();
 
@@ -80,8 +86,8 @@ public class PizzaBusiness {
 	/**
 	 * Update.
 	 *
-	 * @param id the id
-	 * @param newPizza the new pizza
+	 * @param id  the id
+	 * @param dto the dto
 	 * @return the optional
 	 */
 	public PizzaDTO update(long id, PizzaDTO dto) {
