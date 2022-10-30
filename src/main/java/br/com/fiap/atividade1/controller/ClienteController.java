@@ -2,6 +2,7 @@ package br.com.fiap.atividade1.controller;
 
 import br.com.fiap.atividade1.business.ClienteBusiness;
 import br.com.fiap.atividade1.dto.ClienteDTO;
+import br.com.fiap.atividade1.dto.PedidoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,4 +87,10 @@ public class ClienteController {
     {
     	return this.clienteBusiness.delete(id);
     }
+
+	@RequestMapping(value = "/pedido", method =  RequestMethod.POST)
+	public ResponseEntity<Object> novoPedido(@RequestBody PedidoDTO pedido)
+	{
+		return clienteBusiness.novoPedido(pedido);
+	}
 }

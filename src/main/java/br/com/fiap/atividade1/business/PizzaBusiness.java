@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.atividade1.dto.PizzaDTO;
@@ -19,7 +20,7 @@ import br.com.fiap.atividade1.repository.PizzaRepository;
 /**
  * The Class PizzaBusiness.
  */
-@RestController
+@Service
 public class PizzaBusiness {
 	
 	/** The pizza repository. */
