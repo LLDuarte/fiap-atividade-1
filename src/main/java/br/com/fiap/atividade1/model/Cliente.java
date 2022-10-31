@@ -29,9 +29,6 @@ public class Cliente {
 	@Column(name = "email", nullable = false, length = 100)
 	private String email;
 
-	@Column(name = "cpf", nullable = false, length = 11)
-	private String cpf;
-
 	@Column(name = "rua", nullable = false, length = 100)
 	private String rua;
 
@@ -43,9 +40,6 @@ public class Cliente {
 
 	@Column(name = "cidade", nullable = false, length = 35)
 	private String cidade;
-
-	@Column(name = "complemento", nullable = false, length = 100)
-	private String complemento;
 
 	@OneToMany(cascade = CascadeType.ALL,
 			orphanRemoval = true)

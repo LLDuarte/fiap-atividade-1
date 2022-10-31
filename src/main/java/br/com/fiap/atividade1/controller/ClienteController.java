@@ -23,6 +23,7 @@ public class ClienteController {
 	 *
 	 * @return the all
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/clientes", method = RequestMethod.GET)
     public List<ClienteDTO> getAll() {
         return clienteBusiness.getAll();
@@ -34,13 +35,14 @@ public class ClienteController {
 	 * @param id the id
 	 * @return the cliente
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET)
     public ResponseEntity<ClienteDTO> get(@PathVariable(value = "id") long id)
     {
         ClienteDTO cliente = clienteBusiness.get(id);
         
         if(cliente != null)
-            return new ResponseEntity<ClienteDTO>(cliente, HttpStatus.OK);
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -51,8 +53,9 @@ public class ClienteController {
 	 * @param cliente the cliente
 	 * @return the cliente
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/cliente/create", method =  RequestMethod.POST)
-    public ClienteDTO create(@RequestBody ClienteDTO cliente)
+	public ClienteDTO create(@RequestBody ClienteDTO cliente)
     {
         return clienteBusiness.create(cliente);
     }
@@ -64,6 +67,7 @@ public class ClienteController {
      * @param newcliente the new cliente
      * @return the response entity
      */
+	@CrossOrigin
     @RequestMapping(value = "/cliente/{id}", method =  RequestMethod.PUT)
     public ResponseEntity<ClienteDTO> update(@PathVariable(value = "id") long id, @RequestBody ClienteDTO newcliente)
     {
@@ -82,12 +86,14 @@ public class ClienteController {
      * @param id the id
      * @return the response entity
      */
+	@CrossOrigin
     @RequestMapping(value = "/cliente/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable(value = "id") long id)
     {
     	return this.clienteBusiness.delete(id);
     }
 
+	@CrossOrigin
 	@RequestMapping(value = "/pedido", method =  RequestMethod.POST)
 	public ResponseEntity<Object> novoPedido(@RequestBody PedidoDTO pedido)
 	{

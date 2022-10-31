@@ -5,11 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.fiap.atividade1.business.PizzaBusiness;
 import br.com.fiap.atividade1.dto.PizzaDTO;
@@ -31,6 +27,7 @@ public class PizzaController {
 	 *
 	 * @return the all
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/pizzas", method = RequestMethod.GET)
     public List<PizzaDTO> getAll() {
         return pizzaBusiness.getAll();
@@ -42,6 +39,7 @@ public class PizzaController {
 	 * @param id the id
 	 * @return the pizza
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/pizza/{id}", method = RequestMethod.GET)
     public ResponseEntity<PizzaDTO> get(@PathVariable(value = "id") long id)
     {
@@ -59,6 +57,7 @@ public class PizzaController {
 	 * @param pizza the pizza
 	 * @return the pizza
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/pizza/create", method =  RequestMethod.POST)
     public PizzaDTO create(@RequestBody PizzaDTO pizza)
     {
@@ -72,7 +71,8 @@ public class PizzaController {
      * @param newPizza the new pizza
      * @return the response entity
      */
-    @RequestMapping(value = "/pizza/{id}", method =  RequestMethod.PUT)
+	@CrossOrigin
+	@RequestMapping(value = "/pizza/{id}", method =  RequestMethod.PUT)
     public ResponseEntity<PizzaDTO> update(@PathVariable(value = "id") long id, @RequestBody PizzaDTO newPizza)
     {
     	PizzaDTO updatedPizza = this.pizzaBusiness.update(id, newPizza);
@@ -90,7 +90,8 @@ public class PizzaController {
      * @param id the id
      * @return the response entity
      */
-    @RequestMapping(value = "/pizza/{id}", method = RequestMethod.DELETE)
+	@CrossOrigin
+	@RequestMapping(value = "/pizza/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable(value = "id") long id)
     {
     	return this.pizzaBusiness.delete(id);

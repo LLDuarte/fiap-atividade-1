@@ -137,7 +137,6 @@ public class ClienteBusiness {
         Cliente cliente = this.clienteRepository.findById(pedido.getClienteId())
                 .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
 
-
         novoPedido.setCliente(cliente);
         novoPedido.setStatus(StatusPedido.EM_PREPARO);
 

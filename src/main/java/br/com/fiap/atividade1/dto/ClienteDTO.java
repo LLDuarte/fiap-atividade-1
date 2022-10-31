@@ -28,8 +28,6 @@ public class ClienteDTO {
 
 	private String email;
 
-	private String cpf;
-
 	private String rua;
 
 	private Integer numero;
@@ -38,18 +36,14 @@ public class ClienteDTO {
 
 	private String cidade;
 
-	private String complemento;
-
 	public ClienteDTO(Cliente cliente) {
 		this.name = cliente.getName();
 		this.celular = cliente.getCelular();
 		this.email = cliente.getEmail();
-		this.cpf = cliente.getCpf();
 		this.rua = cliente.getRua();
 		this.numero = cliente.getNumero();
 		this.bairro = cliente.getBairro();
 		this.cidade = cliente.getCidade();
-		this.complemento = cliente.getComplemento();
 	}
 
 }
