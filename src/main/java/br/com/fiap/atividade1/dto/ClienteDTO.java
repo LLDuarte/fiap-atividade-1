@@ -14,12 +14,14 @@ import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Cliente dto.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClienteDTO {
 
-	private Long id;
 	private String name;
 
 	private String celular;
@@ -39,7 +41,6 @@ public class ClienteDTO {
 	private String complemento;
 
 	public ClienteDTO(Cliente cliente) {
-		this.id = cliente.getId();
 		this.name = cliente.getName();
 		this.celular = cliente.getCelular();
 		this.email = cliente.getEmail();

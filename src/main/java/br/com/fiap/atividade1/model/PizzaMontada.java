@@ -28,7 +28,7 @@ public class PizzaMontada {
         StringBuilder ingredientes = new StringBuilder();
 
         for(String ingrediente : pizza.getIngredients()) {
-            ingredientes.append(ingrediente);
+            ingredientes.append(ingrediente + " ");
         }
 
         this.ingredientes = ingredientes.toString();

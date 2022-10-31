@@ -153,7 +153,6 @@ public class ClienteBusiness {
      * @param dto the dto
      */
     private void mapDtoToEntity(ClienteDTO dto, Cliente entity) {
-        entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setCelular(dto.getCelular());
         entity.setEmail(dto.getEmail());

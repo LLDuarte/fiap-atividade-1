@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoDTO {
+public class 	PedidoDTO {
 
 	private Set<Long> pizzasId;
 
