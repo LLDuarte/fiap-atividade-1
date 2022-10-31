@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -44,4 +46,8 @@ public class Cliente {
 
 	@Column(name = "complemento", nullable = false, length = 100)
 	private String complemento;
+
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<Pedido> pedidos = new ArrayList<>();
 }

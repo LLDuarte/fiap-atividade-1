@@ -1,20 +1,18 @@
 package br.com.fiap.atividade1;
 
+import br.com.fiap.atividade1.business.ClienteBusiness;
 import br.com.fiap.atividade1.business.PizzaBusiness;
+import br.com.fiap.atividade1.dto.ClienteDTO;
 import br.com.fiap.atividade1.dto.PizzaDTO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import javax.annotation.Resource;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 @SpringBootApplication
 public class Atividade1Application {
@@ -24,7 +22,7 @@ public class Atividade1Application {
 	}
 
 	@Bean
-	CommandLineRunner run(PizzaBusiness pizzaBusiness) {
+	CommandLineRunner run(PizzaBusiness pizzaBusiness, ClienteBusiness clienteBusiness) {
 		return args -> {
 			List<PizzaDTO> pizzas = new ArrayList();
 
@@ -35,6 +33,20 @@ public class Atividade1Application {
 			pizzas.add(new PizzaDTO("4 Queijos", new HashSet<>(Arrays.asList("Parmesão", "Provolone", "Cream Cheese", "Queijo Prato"))));
 
 			pizzaBusiness.createBatch(pizzas);
+
+			ClienteDTO cliente = new ClienteDTO(
+				"cliente 1",
+				"999999999",
+				"email@email.com",
+				"12345678910",
+				"endereco generico",
+				10,
+				"bairro",
+				"cidade",
+				"complemento"
+			);
+
+			clienteBusiness.create(cliente);
 		};
 	}
 }
