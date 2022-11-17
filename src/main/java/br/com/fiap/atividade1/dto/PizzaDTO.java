@@ -13,12 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PizzaDTO {
+	private Long id;
 	
 	private String name;
 	
 	private Set<String> ingredients;
 	
 	public PizzaDTO(Pizza pizza) {
+		this.id = pizza.getId();
 		this.name = pizza.getName();
 		
 		Set<String> ingredientes = new HashSet<>();

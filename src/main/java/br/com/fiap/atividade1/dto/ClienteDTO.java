@@ -22,6 +22,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class ClienteDTO {
 
+	private Long id;
+
 	private String name;
 
 	private String celular;
@@ -37,6 +39,7 @@ public class ClienteDTO {
 	private String cidade;
 
 	public ClienteDTO(Cliente cliente) {
+		this.id = cliente.getId();
 		this.name = cliente.getName();
 		this.celular = cliente.getCelular();
 		this.email = cliente.getEmail();

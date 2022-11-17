@@ -155,11 +155,9 @@ public class ClienteBusiness {
         entity.setName(dto.getName());
         entity.setCelular(dto.getCelular());
         entity.setEmail(dto.getEmail());
-        entity.setCpf(dto.getCpf());
         entity.setRua(dto.getRua());
         entity.setNumero(dto.getNumero());
         entity.setBairro(dto.getBairro());
         entity.setCidade(dto.getCidade());
-        entity.setComplemento(dto.getComplemento());
     }
 }
